@@ -1,0 +1,4 @@
+suites:
+    ajgl_csv_rfc_suite:
+        namespace: Ajgl\Csv\Rfc
+        psr4_prefix: Ajgl\Csv\Rfc
