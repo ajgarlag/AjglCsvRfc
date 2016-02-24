@@ -35,9 +35,9 @@ functions and methods:
 | `fgetcsv`  | `Ajgl\Csv\Rfc\fgetcsv`  |
 | `fputcsv`  | `Ajgl\Csv\Rfc\fputcsv`  |
 | `str_getcsv`  | `Ajgl\Csv\Rfc\str_getcsv`  |
-| `SplFileObject::fgetcsv`  | `Ajgl\Csv\Spl\Rfc\SplFileObject::fgetcsv`  |
-| `SplFileObject::fputcsv`  | `Ajgl\Csv\Spl\Rfc\SplFileObject::fputcsv`  |
-| `SplFileObject::setCsvControl`  | `Ajgl\Csv\Spl\Rfc\SplFileObject::setCsvControl`  |
+| `SplFileObject::fgetcsv`  | `Ajgl\Csv\Rfc\Spl\SplFileObject::fgetcsv`  |
+| `SplFileObject::fputcsv`  | `Ajgl\Csv\Rfc\Spl\SplFileObject::fputcsv`  |
+| `SplFileObject::setCsvControl`  | `Ajgl\Csv\Rfc\Spl\SplFileObject::setCsvControl`  |
 
 
 Usage
