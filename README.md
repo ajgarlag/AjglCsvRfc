@@ -19,7 +19,7 @@ compliant CSV files.
 The native PHP implementation contains a *Wont fix* bug [#50686] when you try to write a CSV field which contains the
 escape char (`\` by default), followed by the enclosure char (`"` by default).
 
-The RFC 4180 states that:
+The [RFC 4180] states that:
 > If double-quotes are used to enclose fields, then a double-quote
 > appearing inside a field must be escaped by preceding it with
 > another double quote.
@@ -38,6 +38,15 @@ functions and methods:
 | `SplFileObject::fgetcsv`  | `Ajgl\Csv\Rfc\Spl\SplFileObject::fgetcsv`  |
 | `SplFileObject::fputcsv`  | `Ajgl\Csv\Rfc\Spl\SplFileObject::fputcsv`  |
 | `SplFileObject::setCsvControl`  | `Ajgl\Csv\Rfc\Spl\SplFileObject::setCsvControl`  |
+
+
+Installation
+------------
+
+To install the latest stable version of this component, open a console and execute the following command:
+```
+$ composer require ajgl/csv-rfc
+```
 
 
 Usage
@@ -101,7 +110,7 @@ ini_set('ini.auto-detect-line-endings', true);
 License
 -------
 
-This component is under the MIT license. See the complete license in the LICENSE file.
+This component is under the MIT license. See the complete license in the [LICENSE] file.
 
 
 Reporting an issue or a feature request
@@ -118,6 +127,8 @@ Developed with ♥ by [Antonio J. García Lagar].
 If you find this component useful, please add a ★ in the [GitHub repository page] and/or the [Packagist package page].
 
 [#50686]: https://bugs.php.net/bug.php?id=50686
+[RFC 4180]: https://tools.ietf.org/html/rfc4180
+[LICENSE]: LICENSE
 [Github issue tracker]: https://github.com/ajgarlag/AjglCsvRfc/issues
 [Antonio J. García Lagar]: http://aj.garcialagar.es
 [GitHub repository page]: https://github.com/ajgarlag/AjglCsvRfc
