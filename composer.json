@@ -1,0 +1,15 @@
+{
+    "name": "ajgl/csv-rfc",
+    "description": "Drop in replacement for native PHP CSV related functions to read and/or write RFC4180 compliant CSV files",
+    "keywords": ["csv", "rfc", "4180", "rfc4180"],
+    "homepage": "https://github.com/ajgarlag/AjglCsvRfc",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Antonio J. García Lagar",
+        "email": "aj@garcialagar.es",
+        "homepage": "http://aj.garcialagar.es",
+        "role": "developer"
+      }
+    ]
+}
