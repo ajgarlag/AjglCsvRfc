@@ -27,8 +27,8 @@ The [RFC 4180] states that:
 The CSV version of the string `Hello \"World"!` should be `"Hello \""World""!"` but it does not work as expected. You
 can see a detailed explanation at https://3v4l.org/aROTj
 
-This package provides an alternative implementation to read and write well escaped CSV files with for the following
-functions and methods:
+This package provides an alternative implementation to read and write well escaped CSV files for the following functions
+and methods:
 
 | Native | Alternative |
 | ------ | ----------- |
