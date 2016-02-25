@@ -2,7 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## [Unreleased][unreleased]
+
+## 0.1.0 - 2016-02-25
 ### Added
 - Add alternative implementation for CSV related functions:
   - `str_getcsv`
@@ -12,3 +14,5 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - `SplFileObject::fgetcsv`
   - `SplFileObject::fputcsv`
   - `SplFileObject::setCsvControl`
+
+[unreleased]: https://github.com/ajgarlag/AjglCsvRfc/compare/0.1.0...master
