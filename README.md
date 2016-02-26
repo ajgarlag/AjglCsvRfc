@@ -24,8 +24,8 @@ The [RFC 4180] states that:
 > appearing inside a field must be escaped by preceding it with
 > another double quote.
 
-The CSV version of the string `Hello \"World"!` should be `"Hello \""World""!"` but it does not work as expected. You
-can see a detailed explanation at https://3v4l.org/aROTj
+The CSV version of the string `"Hello\", World!` should be `"""Hello\"", World!"` but it does not work as expected. You
+can see a detailed explanation at https://3v4l.org/NnHp4
 
 This package provides an alternative implementation to read and write well escaped CSV files for the following functions
 and methods:
