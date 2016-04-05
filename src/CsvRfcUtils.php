@@ -131,12 +131,24 @@ abstract class CsvRfcUtils
             $line .= $file->fgets();
         }
 
-        $line = \str_replace('\\'.$enclosure, '\\'.$enclosure.$enclosure, $line);
+        $line = self::fixEnclosureEscape($enclosure, $line);
+
         if ($eol !== self::EOL_WRITE_DEFAULT) {
             $line = rtrim($line, "\n").$eol;
         }
 
         return $line;
+    }
+
+    /**
+     * Fix the enclosure escape in the given CSV raw line.
+     *
+     * @param string $enclosure
+     * @param string $line
+     */
+    public static function fixEnclosureEscape($enclosure, $line)
+    {
+        return \str_replace('\\'.$enclosure, '\\'.$enclosure.$enclosure, $line);
     }
 
     /**
