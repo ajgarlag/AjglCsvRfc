@@ -164,4 +164,12 @@ class CsvRfcUtilsTest extends \PHPUnit_Framework_TestCase
 
         CsvRfcUtils::setDefaultWriteEol(CsvRfcUtils::EOL_WRITE_DEFAULT);
     }
+
+    public function testFixEnclosureEscape()
+    {
+        $payload = '""Hello\", World!';
+        $expected = '""Hello\"", World!';
+        $actual = CsvRfcUtils::fixEnclosureEscape('"', $payload);
+        $this->assertEquals($expected, $actual);
+    }
 }

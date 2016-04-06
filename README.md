@@ -70,7 +70,9 @@ $row = Rfc\str_getcsv(fgets($handler));
 
 If you prefer you can use the alternative implementation for `SplFileObject` or `SplTempFileObject`:
 ```php
-$file = new Ajgl\Csv\Rfc\Spl\SplFileObject('php://temp', 'w+');
+use Ajgl\Csv\Rfc;
+
+$file = new Rfc\Spl\SplFileObject('php://temp', 'w+');
 $file->fputcsv(array('Hello \"World"!'));
 $file->rewind();
 $row = $file->fgetcsv();
@@ -80,6 +82,86 @@ foreach ($file as $line) {
     $row = $line;
 }
 ```
+
+### Stream filtering
+
+Instead of using the alternative functions or classes, you can use the provided stream filter to fix the enclosure
+escape. You must register the stream filter (if not registered yet) and append it to your stream:
+```php
+use Ajgl\Csv\Rfc;
+
+Rfc\CsvRfcWriteStreamFilter::register();
+
+$handler = fopen('php://temp', 'w+');
+stream_filter_append(
+    $handler,
+    Rfc\CsvRfcWriteStreamFilter::FILTERNAME_DEFAULT,
+    STREAM_FILTER_WRITE
+);
+fputcsv($handler, array('Hello \"World"!'));
+rewind($handler);
+$row = fgetcsv($handler, 0, ',', '"', '"');
+```
+
+**IMPORTANT**: You cannot provide a `$escape_char` to `fputcsv`, and you must set the `$enclosure` and `$escape`
+parameters of `fgetcsv` to the same character.
+
+**KNOWN LIMITATION**: The stream filter is not supported in HHVM.
+
+#### Custom enclosure character
+
+By default, the enclosure character of the stream filter is a double-quote (`"`). If you want to change it, you can
+provide a custom enclosure character in two different ways.
+
+##### Via filter params
+
+An array with an `enclosure` key can be provided when appending the filter to the stream:
+
+```php
+use Ajgl\Csv\Rfc;
+
+$enclosure = '@';
+Rfc\CsvRfcWriteStreamFilter::register();
+
+$handler = fopen('php://temp', 'w+');
+stream_filter_append(
+    $handler,
+    Rfc\CsvRfcWriteStreamFilter::FILTERNAME_DEFAULT,
+    STREAM_FILTER_WRITE,
+    array(
+        'enclosure' => $enclosure
+    )
+);
+fputcsv($handler, array('Hello \"World"!'), ',', '@');
+rewind($handler);
+$row = fgetcsv($handler, 0, ',', '@', '@');
+```
+
+##### Via filter name
+
+If the filter name starts with the special key `csv.rfc.write.` you can define your custom enclosure character appending
+it to the filtername:
+
+```php
+use Ajgl\Csv\Rfc;
+
+$enclosure = '@';
+$filtername = 'csv.rfc.write.' . $enclosure;
+Rfc\CsvRfcWriteStreamFilter::register($filtername);
+
+$handler = fopen('php://temp', 'w+');
+stream_filter_append(
+    $handler,
+    $filtername,
+    STREAM_FILTER_WRITE
+);
+fputcsv($handler, array('Hello \"World"!'), ',', '@');
+rewind($handler);
+$row = fgetcsv($handler, 0, ',', '@', '@');
+```
+
+*Beware*: the enclosure character passed via parameters will override the defined via filter name.
+
 
 ### End of line (EOL)
 
