@@ -103,9 +103,10 @@ rewind($handler);
 $row = fgetcsv($handler, 0, ',', '"', '"');
 ```
 
-**KNOWN LIMITATIONS**: You cannot provide a `$escape_char` to `fputcsv`, and you must set the `$enclosure` and `$escape`
+**IMPORTANT**: You cannot provide a `$escape_char` to `fputcsv`, and you must set the `$enclosure` and `$escape`
 parameters of `fgetcsv` to the same character.
 
+**KNOWN LIMITATION**: The stream filter is not supported in HHVM.
 
 #### Custom enclosure character
 
