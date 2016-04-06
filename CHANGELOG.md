@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - New `Ajgl\Csv\Rfc\CsvRfcUtils::fixEnclosureEscape` method
 - New stream filter `Ajgl\Csv\Rfc\CsvRfcWriteStreamFilter`
 
+### Changed
+- Remove the abstract declaration of `Ajgl\Csv\Rfc\CsvRfcUtils`
+- Declare the `Ajgl\Csv\Rfc\CsvRfcUtils` constructor as private
+
 ## 0.1.0 - 2016-02-25
 ### Added
 - Add alternative implementation for CSV related functions:

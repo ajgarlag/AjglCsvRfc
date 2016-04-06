@@ -14,12 +14,16 @@ namespace Ajgl\Csv\Rfc;
 /**
  * @author Antonio J. García Lagar <aj@garcialagar.es>
  */
-abstract class CsvRfcUtils
+class CsvRfcUtils
 {
     const EOL_WRITE_DEFAULT = "\n";
     const EOL_WRITE_RFC = "\r\n";
 
     private static $defaultEol = self::EOL_WRITE_DEFAULT;
+
+    private function __construct()
+    {
+    }
 
     /**
      * @see http://php.net/manual/en/function.fputcsv.php
