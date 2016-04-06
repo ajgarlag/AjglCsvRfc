@@ -17,11 +17,17 @@ class CsvRfcWriteStreamFilter extends \php_user_filter
 
     private $filternameEnclosure = '"';
 
+    /**
+     * @param string $filtername
+     */
     public static function register($filtername = self::FILTERNAME_DEFAULT)
     {
         stream_filter_register($filtername, 'Ajgl\Csv\Rfc\CsvRfcWriteStreamFilter');
     }
 
+    /**
+     * @return bool
+     */
     public function onCreate()
     {
         $this->extractEnclosureFromFilternameIfAvailable();
@@ -36,6 +42,13 @@ class CsvRfcWriteStreamFilter extends \php_user_filter
         }
     }
 
+    /**
+     * @param resource $in
+     * @param resource $out
+     * @param int $consumed
+     * @param bool $closing
+     * @return int
+     */
     public function filter($in, $out, &$consumed, $closing)
     {
         $enclosure = $this->resolveEnclosure();
@@ -49,6 +62,9 @@ class CsvRfcWriteStreamFilter extends \php_user_filter
         return PSFS_PASS_ON;
     }
 
+    /**
+     * @return string
+     */
     private function resolveEnclosure()
     {
         if (is_array($this->params) && isset($this->params['enclosure']) && strlen($this->params['enclosure']) === 1) {
