@@ -19,10 +19,11 @@ class CsvRfcWriteStreamFilter extends \php_user_filter
 
     /**
      * @param string $filtername
+     * @return bool
      */
     public static function register($filtername = self::FILTERNAME_DEFAULT)
     {
-        stream_filter_register($filtername, 'Ajgl\Csv\Rfc\CsvRfcWriteStreamFilter');
+        return stream_filter_register($filtername, 'Ajgl\Csv\Rfc\CsvRfcWriteStreamFilter');
     }
 
     /**
