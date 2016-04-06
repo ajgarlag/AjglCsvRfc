@@ -19,6 +19,7 @@ class CsvRfcWriteStreamFilter extends \php_user_filter
 
     /**
      * @param string $filtername
+     *
      * @return bool
      */
     public static function register($filtername = self::FILTERNAME_DEFAULT)
@@ -46,8 +47,9 @@ class CsvRfcWriteStreamFilter extends \php_user_filter
     /**
      * @param resource $in
      * @param resource $out
-     * @param int $consumed
-     * @param bool $closing
+     * @param int      $consumed
+     * @param bool     $closing
+     *
      * @return int
      */
     public function filter($in, $out, &$consumed, $closing)
