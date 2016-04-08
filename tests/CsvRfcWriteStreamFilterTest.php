@@ -12,6 +12,8 @@
 namespace Ajgl\Csv\Rfc\Tests;
 
 use Ajgl\Csv\Rfc\CsvRfcWriteStreamFilter;
+use League\Csv\Reader;
+use League\Csv\Writer;
 
 /**
  * @author Antonio J. García Lagar <aj@garcialagar.es>
@@ -64,5 +66,32 @@ class CsvRfcWriteStreamFilterTest extends \PHPUnit_Framework_TestCase
         $actual = fgets($fp, 4096);
         $expected = '%%%Hello\%%, World!%'."\n";
         $this->assertEquals($expected, $actual);
+    }
+
+    public function testLeagueCsvIntegrationWithPath()
+    {
+        if (!class_exists('League\Csv\Writer')) {
+            $this->markTestSkipped("'league/csv' package not found.");
+        }
+
+        $payload = '"Hello\", World!';
+
+        CsvRfcWriteStreamFilter::register();
+        $filepath = tempnam(sys_get_temp_dir(), 'ajgl_csv_rfc_test_');
+        $writer = Writer::createFromPath($filepath);
+        $writer->appendStreamFilter(CsvRfcWriteStreamFilter::FILTERNAME_DEFAULT);
+        $writer->insertOne(array($payload));
+        unset($writer);
+
+        $fp = fopen($filepath, 'r');
+        $actual = fgets($fp, 4096);
+        $expected = '"""Hello\"", World!"'."\n";
+        $this->assertEquals($expected, $actual);
+        fclose($fp);
+
+        $reader = Reader::createFromPath($filepath);
+        $reader->setEscape($reader->getEnclosure());
+        $data = array(array($payload));
+        $this->assertEquals($data, iterator_to_array($reader));
     }
 }

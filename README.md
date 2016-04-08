@@ -83,7 +83,7 @@ foreach ($file as $line) {
 }
 ```
 
-### Stream filtering
+### Stream filter
 
 Instead of using the alternative functions or classes, you can use the provided stream filter to fix the enclosure
 escape. You must register the stream filter (if not registered yet) and append it to your stream:
@@ -102,11 +102,8 @@ fputcsv($handler, array('Hello \"World"!'));
 rewind($handler);
 $row = fgetcsv($handler, 0, ',', '"', '"');
 ```
-
-**IMPORTANT**: You cannot provide a `$escape_char` to `fputcsv`, and you must set the `$enclosure` and `$escape`
-parameters of `fgetcsv` to the same character.
-
-**KNOWN LIMITATION**: The stream filter is not supported in HHVM.
+**❮ NOTE ❯**: The `$escape_char` in [fputcsv] MUST be (if allowed) the default one (the backslash `\`). The `$enclosure`
+and `$escape` parameters in [fgetcsv] MUST be equals.
 
 #### Custom enclosure character
 
@@ -160,7 +157,7 @@ rewind($handler);
 $row = fgetcsv($handler, 0, ',', '@', '@');
 ```
 
-*Beware*: the enclosure character passed via parameters will override the defined via filter name.
+**❮ NOTE ❯**: The enclosure character passed via parameters will override the one defined via filter name.
 
 
 ### End of line (EOL)
@@ -182,10 +179,59 @@ CsvRfcUtils::setDefaultWriteEol(CsvRfcUtils::EOL_WRITE_RFC);
 
 #### Reading CSV
 To read the CSV data, this implementation leverages the PHP native capabilities to read files. If you are having any
-problem with this, you should enable the `auto_detect_line_endings` configuration option as following the PHP doc
-[recomendation](https://secure.php.net/manual/en/filesystem.configuration.php#ini.auto-detect-line-endings).
+problem with the EOL detection, you should enable the `auto_detect_line_endings` configuration option as following the
+PHP doc [recomendation](https://secure.php.net/manual/en/filesystem.configuration.php#ini.auto-detect-line-endings).
 ```php
 ini_set('ini.auto-detect-line-endings', true);
+```
+
+
+### Integration with `league/csv`
+
+The well known [`league/csv`](http://csv.thephpleague.com/) package provide a great object oriented API to work with CSV
+data, but as long as it leverages the default PHP implementation for CSV, is affected by the [#50686] bug.
+
+You can use this component with `league/csv` to produce [RFC 4180] compatible files avoiding this bug.
+
+
+#### Writer integration
+
+To integrate this component with the `league/csv` writer implementation, you can use the Stream Filter API.
+
+```php
+use Ajgl\Csv\Rfc;
+use League\Csv\Writer;
+
+CsvRfcWriteStreamFilter::register();
+$writer = Writer::createFromPath('/tmp/foobar.csv');
+if (!$writer->isActiveStreamFilter()) {
+    throw new \Exception("The Stream Filter API is not active.");
+}
+$writer->appendStreamFilter(CsvRfcWriteStreamFilter::FILTERNAME_DEFAULT);
+$writer->insertOne(array('"Hello\", World!'));
+```
+**❮ NOTE ❯**: Do not override the default writer escape character (`\`).
+
+##### Known limitations
+ * The `league/csv` package does not support the Stream Filter API when the writer instance is created from a
+`SplFileObject`.
+ * The `league/csv` implementation will always leverage the standard `\SplFileObject::fputcsv` to write CSV data, so the
+fix to write [RFC 4180] compatible files from `Ajgl\Csv\Rfc\Spl\SplFileObject::fputcsv` will be ignored.
+
+
+#### Reader Integration
+
+To read back the CSV data, you can leverage the standard implementation, but you MUST set the reader escape and
+enclosure characters to the same value.
+
+```php
+use League\Csv\Reader;
+
+$reader = Reader::createFromPath('/tmp/foobar.csv');
+$reader->setEscape($reader->getEnclosure());
+foreach ($reader as $row) {
+    //...
+}
 ```
 
 
@@ -210,6 +256,8 @@ If you find this component useful, please add a ★ in the [GitHub repository pa
 
 [#50686]: https://bugs.php.net/bug.php?id=50686
 [RFC 4180]: https://tools.ietf.org/html/rfc4180
+[fgetcsv]: http://php.net/manual/en/function.fgetcsv.php
+[fputcsv]: http://php.net/manual/en/function.fputcsv.php
 [LICENSE]: LICENSE
 [Github issue tracker]: https://github.com/ajgarlag/AjglCsvRfc/issues
 [Antonio J. García Lagar]: http://aj.garcialagar.es
