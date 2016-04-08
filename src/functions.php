@@ -20,7 +20,7 @@ namespace Ajgl\Csv\Rfc;
  * @param string   $enclosure
  * @param string   $escape
  */
-function fputcsv($handle, array $fields, $delimiter = ',', $enclosure = '"', $escape = '"')
+function fputcsv($handle, array $fields, $delimiter = ',', $enclosure = '"', $escape = '\\')
 {
     CsvRfcUtils::fPutCsv($handle, $fields, $delimiter, $enclosure, $escape);
 }

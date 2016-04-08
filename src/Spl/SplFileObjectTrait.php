@@ -28,31 +28,22 @@ trait SplFileObjectTrait
         $this->setCsvControl($delimiter, $enclosure);
     }
 
-    /**
-     * @param string $enclosure
-     * @param string $escape
-     */
-    protected function checkEscapeChar($enclosure, $escape)
-    {
-        CsvRfcUtils::checkCsvEscape($enclosure, $escape);
-    }
-
     public function fgetcsv($delimiter = ',', $enclosure = '"', $escape = '"')
     {
-        $this->checkEscapeChar($enclosure, $escape);
+        CsvRfcUtils::checkGetCsvEscape($enclosure, $escape);
 
         return parent::fgetcsv($delimiter, $enclosure, $enclosure);
     }
 
-    public function fputcsv($fields, $delimiter = ',', $enclosure = '"', $escape = '"')
+    public function fputcsv($fields, $delimiter = ',', $enclosure = '"', $escape = '\\')
     {
-        $this->checkEscapeChar($enclosure, $escape);
+        CsvRfcUtils::checkPutCsvEscape($escape);
         $this->fwrite(CsvRfcUtils::strPutCsv($fields, $delimiter, $enclosure));
     }
 
     public function setCsvControl($delimiter = ',', $enclosure = '"', $escape = '"')
     {
-        $this->checkEscapeChar($enclosure, $escape);
+        CsvRfcUtils::checkGetCsvEscape($enclosure, $escape);
         parent::setCsvControl($delimiter, $enclosure, $enclosure);
     }
 }

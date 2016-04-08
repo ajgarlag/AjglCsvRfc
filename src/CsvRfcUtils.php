@@ -35,9 +35,9 @@ class CsvRfcUtils
      * @param string   $escape
      * @param string   $eol
      */
-    public static function fPutCsv($handle, array $fields, $delimiter = ',', $enclosure = '"', $escape = '"', $eol = null)
+    public static function fPutCsv($handle, array $fields, $delimiter = ',', $enclosure = '"', $escape = '\\', $eol = null)
     {
-        self::checkCsvEscape($enclosure, $escape);
+        self::checkPutCsvEscape($escape);
 
         $eol = self::resolveEol($eol);
         if ($eol !== self::EOL_WRITE_DEFAULT || self::hasAnyValueWithEscapeFollowedByEnclosure($fields, $enclosure)) {
@@ -87,7 +87,7 @@ class CsvRfcUtils
      */
     public static function fGetCsv($handle, $length = 0, $delimiter = ',', $enclosure = '"', $escape = '"')
     {
-        self::checkCsvEscape($enclosure, $escape);
+        self::checkGetCsvEscape($enclosure, $escape);
 
         return \fgetcsv($handle, $length, $delimiter, $enclosure, $enclosure);
     }
@@ -104,7 +104,7 @@ class CsvRfcUtils
      */
     public static function strGetCsv($input, $delimiter = ',', $enclosure = '"', $escape = '"')
     {
-        self::checkCsvEscape($enclosure, $escape);
+        self::checkGetCsvEscape($enclosure, $escape);
 
         return \str_getcsv($input, $delimiter, $enclosure, $enclosure);
     }
@@ -156,17 +156,37 @@ class CsvRfcUtils
     }
 
     /**
+     * Emits a warning if the escape char is not the default backslash or null.
+     *
+     * @param string $escape
+     */
+    public static function checkPutCsvEscape($escape)
+    {
+        if ($escape !== '\\' && $escape !== null) {
+            trigger_error(
+                sprintf(
+                    "In writing mode, the escape char must be a backslash '\\'. "
+                        ."The given escape char '%s' will be ignored.",
+                    $escape
+                ),
+                E_USER_WARNING
+            );
+        }
+    }
+
+    /**
      * Emits a warning if the enclosure char and escape char are different.
      *
      * @param string $enclosure
      * @param string $escape
      */
-    public static function checkCsvEscape($enclosure, $escape)
+    public static function checkGetCsvEscape($enclosure, $escape)
     {
         if ($enclosure !== $escape) {
             trigger_error(
                 sprintf(
-                    "The escape and enclosure chars must be equals. The given escape char '%s' will be ignored.",
+                    'In reading mode, the escape and enclosure chars must be equals. '
+                        ."The given escape char '%s' will be ignored.",
                     $escape
                 ),
                 E_USER_WARNING

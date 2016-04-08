@@ -86,7 +86,7 @@ class functionsTest extends \PHPUnit_Framework_TestCase
         );
 
         $fp = fopen('php://temp', 'w+');
-        Rfc\fputcsv($fp, $fields, ';', "'", "'");
+        Rfc\fputcsv($fp, $fields, ';', "'");
         rewind($fp);
         $this->assertEquals(
             "Hello,World!;'Hello;World!';'Hello\\\"World\\\"!';'Hello\''World\''!';'Hello\nWorld!'\n",
