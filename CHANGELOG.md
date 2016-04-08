@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Remove the abstract declaration of `Ajgl\Csv\Rfc\CsvRfcUtils`
 - Declare the `Ajgl\Csv\Rfc\CsvRfcUtils` constructor as private
+- In writing context, the escape char should be a backslash (`\`), any other value will be ignored.
 
 ## 0.1.0 - 2016-02-25
 ### Added

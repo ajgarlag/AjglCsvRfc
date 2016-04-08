@@ -107,7 +107,7 @@ class CsvRfcUtilsTest extends \PHPUnit_Framework_TestCase
         );
 
         $fp = fopen('php://temp', 'w+');
-        CsvRfcUtils::fPutCsv($fp, $fields, ';', "'", "'");
+        CsvRfcUtils::fPutCsv($fp, $fields, ';', "'");
         rewind($fp);
         $this->assertEquals(
             "Hello,World!;'Hello;World!';'Hello\\\"World\\\"!';'Hello\''World\''!';'Hello\nWorld!'\n",
@@ -115,7 +115,7 @@ class CsvRfcUtilsTest extends \PHPUnit_Framework_TestCase
         );
 
         $fp = fopen('php://temp', 'w+');
-        CsvRfcUtils::fPutCsv($fp, $fields, ';', "'", "'", CsvRfcUtils::EOL_WRITE_RFC);
+        CsvRfcUtils::fPutCsv($fp, $fields, ';', "'", null, CsvRfcUtils::EOL_WRITE_RFC);
         rewind($fp);
         $this->assertEquals(
             "Hello,World!;'Hello;World!';'Hello\\\"World\\\"!';'Hello\''World\''!';'Hello\nWorld!'\r\n",
@@ -155,7 +155,7 @@ class CsvRfcUtilsTest extends \PHPUnit_Framework_TestCase
         );
 
         $fp = fopen('php://temp', 'w+');
-        CsvRfcUtils::fPutCsv($fp, $fields, ';', "'", "'");
+        CsvRfcUtils::fPutCsv($fp, $fields, ';', "'");
         rewind($fp);
         $this->assertEquals(
             "Hello,World!;'Hello;World!';'Hello\\\"World\\\"!';'Hello\''World\''!';'Hello\nWorld!'\r\n",
