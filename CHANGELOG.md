@@ -2,7 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased][unreleased]
+## [Unreleased]
+
+## [0.2.0] - 2016-04-08
 ### Added
 - New `Ajgl\Csv\Rfc\CsvRfcUtils::fixEnclosureEscape` method
 - New stream filter `Ajgl\Csv\Rfc\CsvRfcWriteStreamFilter`
@@ -23,4 +25,5 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - `SplFileObject::fputcsv`
   - `SplFileObject::setCsvControl`
 
-[unreleased]: https://github.com/ajgarlag/AjglCsvRfc/compare/0.1.0...master
+[unreleased]: https://github.com/ajgarlag/AjglCsvRfc/compare/0.2.0...master
+[0.2.0]: https://github.com/ajgarlag/AjglCsvRfc/compare/0.1.0...0.2.0
