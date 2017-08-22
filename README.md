@@ -186,12 +186,12 @@ ini_set('ini.auto-detect-line-endings', true);
 ```
 
 
-### Integration with `league/csv`
+### Integration with `league/csv <9.0`
 
 The well known [`league/csv`](http://csv.thephpleague.com/) package provide a great object oriented API to work with CSV
-data, but as long as it leverages the default PHP implementation for CSV, is affected by the [#50686] bug.
+data, but as long as it leverages the default PHP implementation for CSV, versions prior to 9.0 are affected by the [#50686] bug.
 
-You can use this component with `league/csv` to produce [RFC 4180] compatible files avoiding this bug.
+You can use this component with `league/csv <9.0` to produce [RFC 4180] compatible files avoiding this bug.
 
 
 #### Writer integration
