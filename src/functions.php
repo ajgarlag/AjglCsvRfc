@@ -19,10 +19,12 @@ namespace Ajgl\Csv\Rfc;
  * @param string   $delimiter
  * @param string   $enclosure
  * @param string   $escape
+ *
+ * @return bool | int the number of bytes written, or <b>FALSE</b> on error.
  */
 function fputcsv($handle, array $fields, $delimiter = ',', $enclosure = '"', $escape = '\\')
 {
-    CsvRfcUtils::fPutCsv($handle, $fields, $delimiter, $enclosure, $escape);
+    return CsvRfcUtils::fPutCsv($handle, $fields, $delimiter, $enclosure, $escape);
 }
 
 /**

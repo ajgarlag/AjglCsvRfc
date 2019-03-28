@@ -86,7 +86,7 @@ class CsvRfcUtilsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testFPutCsv()
+    public function testFPutCsvWritesData()
     {
         $fields = array('Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!");
 
@@ -121,6 +121,20 @@ class CsvRfcUtilsTest extends \PHPUnit_Framework_TestCase
             "Hello,World!;'Hello;World!';'Hello\\\"World\\\"!';'Hello\''World\''!';'Hello\nWorld!'\r\n",
             fread($fp, 4096)
         );
+    }
+
+    public function testFPutCsvReturnsValue()
+    {
+        $fields = array('a');
+
+        $fp = fopen('php://temp', 'w+');
+        $result = CsvRfcUtils::fPutCsv($fp, $fields);
+        rewind($fp);
+        $this->assertEquals(
+            "a" . "\n",
+            fread($fp, 4096)
+        );
+        $this->assertEquals(2, $result);
     }
 
     public function testDefaultEol()
