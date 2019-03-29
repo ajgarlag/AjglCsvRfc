@@ -65,7 +65,7 @@ class functionsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function test_fputcsv()
+    public function test_fputcsv_data()
     {
         $fields = array('Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!");
 
@@ -92,5 +92,19 @@ class functionsTest extends \PHPUnit_Framework_TestCase
             "Hello,World!;'Hello;World!';'Hello\\\"World\\\"!';'Hello\''World\''!';'Hello\nWorld!'\n",
             fread($fp, 4096)
         );
+    }
+
+    public function test_fputcsv_return_value()
+    {
+        $fields = array('a');
+
+        $fp = fopen('php://temp', 'w+');
+        $result = Rfc\fputcsv($fp, $fields);
+        rewind($fp);
+        $this->assertEquals(
+            "a"."\n",
+            fread($fp, 4096)
+        );
+        $this->assertEquals(2, $result);
     }
 }

@@ -34,6 +34,8 @@ class CsvRfcUtils
      * @param string   $enclosure
      * @param string   $escape
      * @param string   $eol
+     *
+     * @return int|bool the number of bytes written, or FALSE on error.
      */
     public static function fPutCsv($handle, array $fields, $delimiter = ',', $enclosure = '"', $escape = '\\', $eol = null)
     {
@@ -41,9 +43,9 @@ class CsvRfcUtils
 
         $eol = self::resolveEol($eol);
         if ($eol !== self::EOL_WRITE_DEFAULT || self::hasAnyValueWithEscapeFollowedByEnclosure($fields, $enclosure)) {
-            \fwrite($handle, self::strPutCsv($fields, $delimiter, $enclosure, $eol));
+            return \fwrite($handle, self::strPutCsv($fields, $delimiter, $enclosure, $eol));
         } else {
-            \fputcsv($handle, $fields, $delimiter, $enclosure);
+            return \fputcsv($handle, $fields, $delimiter, $enclosure);
         }
     }
 
