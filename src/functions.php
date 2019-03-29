@@ -20,7 +20,7 @@ namespace Ajgl\Csv\Rfc;
  * @param string   $enclosure
  * @param string   $escape
  *
- * @return bool | int the number of bytes written, or <b>FALSE</b> on error.
+ * @return int|bool the number of bytes written, or FALSE on error.
  */
 function fputcsv($handle, array $fields, $delimiter = ',', $enclosure = '"', $escape = '\\')
 {
