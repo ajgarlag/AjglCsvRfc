@@ -14,7 +14,6 @@ compliant CSV files.
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ajgarlag/AjglCsvRfc/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ajgarlag/AjglCsvRfc/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/ajgarlag/AjglCsvRfc/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ajgarlag/AjglCsvRfc/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/7218debc-6c07-4a60-9b0b-e08103c1e0b2/mini.png)](https://insight.sensiolabs.com/projects/7218debc-6c07-4a60-9b0b-e08103c1e0b2)
-[![StyleCI](https://styleci.io/repos/52462082/shield)](https://styleci.io/repos/52462082)
 
 The native PHP implementation contains a *Wont fix* bug [#50686] when you try to write a CSV field which contains the
 escape char (`\` by default), followed by the enclosure char (`"` by default).
