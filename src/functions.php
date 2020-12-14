@@ -31,7 +31,7 @@ function fputcsv($handle, array $fields, $delimiter = ',', $enclosure = '"', $es
  * @see http://php.net/manual/en/function.fgetcsv.php
  *
  * @param resource $handle
- * @param array    $length
+ * @param int    $length
  * @param string   $delimiter
  * @param string   $enclosure
  * @param string   $escape
