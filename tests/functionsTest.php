@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace Ajgl\Rfc\Rfc\Tests;
 
 use Ajgl\Csv\Rfc;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Antonio J. García Lagar <aj@garcialagar.es>
  */
-class functionsTest extends \PHPUnit_Framework_TestCase
+class functionsTest extends TestCase
 {
     public function testStrGetcsv(): void
     {

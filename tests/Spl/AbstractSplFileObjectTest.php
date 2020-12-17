@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace Ajgl\Csv\Rfc\Tests\Spl;
 
+use PHPUnit\Framework\TestCase;
 use SplFileObject;
 
 /**
  * @author Antonio J. García Lagar <aj@garcialagar.es>
  */
-abstract class AbstractSplFileObjectTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractSplFileObjectTest extends TestCase
 {
     /**
      * @var \SplFileObject

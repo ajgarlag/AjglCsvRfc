@@ -16,11 +16,12 @@ namespace Ajgl\Csv\Rfc\Tests;
 use Ajgl\Csv\Rfc\CsvRfcWriteStreamFilter;
 use League\Csv\Reader;
 use League\Csv\Writer;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Antonio J. García Lagar <aj@garcialagar.es>
  */
-class CsvRfcWriteStreamFilterTest extends \PHPUnit_Framework_TestCase
+class CsvRfcWriteStreamFilterTest extends TestCase
 {
     public function testRegiterWithDefaultFiltername(): void
     {
