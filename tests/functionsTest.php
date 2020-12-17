@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * AJGL CSV RFC Component
  *
@@ -18,7 +20,7 @@ use Ajgl\Csv\Rfc;
  */
 class functionsTest extends \PHPUnit_Framework_TestCase
 {
-    public function testStrGetcsv()
+    public function testStrGetcsv(): void
     {
         $expected = ['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"];
 
@@ -36,7 +38,7 @@ class functionsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testFgetcsv()
+    public function testFgetcsv(): void
     {
         $expected = ['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"];
 
@@ -65,7 +67,7 @@ class functionsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testFputcsvData()
+    public function testFputcsvData(): void
     {
         $fields = ['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"];
 
@@ -94,7 +96,7 @@ class functionsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testFputcsvReturnValue()
+    public function testFputcsvReturnValue(): void
     {
         $fields = ['a'];
 

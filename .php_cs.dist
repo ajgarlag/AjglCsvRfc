@@ -13,6 +13,13 @@ return \PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules(
         [
+            '@PHP56Migration' => true,
+            '@PHP56Migration:risky' => true,
+            '@PHP70Migration' => true,
+            '@PHP70Migration:risky' => true,
+            '@PHP71Migration' => true,
+            '@PHP71Migration:risky' => true,
+            '@PHP73Migration' => true,
             '@Symfony' => true,
             '@Symfony:risky' => true,
         ]

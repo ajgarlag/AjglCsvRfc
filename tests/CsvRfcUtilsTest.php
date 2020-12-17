@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * AJGL CSV RFC Component
  *
@@ -18,7 +20,7 @@ use Ajgl\Csv\Rfc\CsvRfcUtils;
  */
 class CsvRfcUtilsTest extends \PHPUnit_Framework_TestCase
 {
-    public function testStrGetCsv()
+    public function testStrGetCsv(): void
     {
         $expected = ['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"];
 
@@ -36,7 +38,7 @@ class CsvRfcUtilsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testFGetCsv()
+    public function testFGetCsv(): void
     {
         $expected = ['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"];
 
@@ -65,7 +67,7 @@ class CsvRfcUtilsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testStrPutCsv()
+    public function testStrPutCsv(): void
     {
         $fields = ['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"];
         $this->assertEquals(
@@ -86,7 +88,7 @@ class CsvRfcUtilsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testFPutCsvWritesData()
+    public function testFPutCsvWritesData(): void
     {
         $fields = ['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"];
 
@@ -123,7 +125,7 @@ class CsvRfcUtilsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testFPutCsvReturnsValue()
+    public function testFPutCsvReturnsValue(): void
     {
         $fields = ['a'];
 
@@ -137,7 +139,7 @@ class CsvRfcUtilsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, $result);
     }
 
-    public function testDefaultEol()
+    public function testDefaultEol(): void
     {
         $this->assertEquals("\n", CsvRfcUtils::getDefaultWriteEol());
         $this->assertNull(CsvRfcUtils::setDefaultWriteEol(CsvRfcUtils::EOL_WRITE_RFC));
@@ -146,7 +148,7 @@ class CsvRfcUtilsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("\n", CsvRfcUtils::getDefaultWriteEol());
     }
 
-    public function testFPutCsvWithRfc()
+    public function testFPutCsvWithRfc(): void
     {
         $fields = ['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"];
 
@@ -179,7 +181,7 @@ class CsvRfcUtilsTest extends \PHPUnit_Framework_TestCase
         CsvRfcUtils::setDefaultWriteEol(CsvRfcUtils::EOL_WRITE_DEFAULT);
     }
 
-    public function testFixEnclosureEscape()
+    public function testFixEnclosureEscape(): void
     {
         $payload = '""Hello\", World!';
         $expected = '""Hello\"", World!';

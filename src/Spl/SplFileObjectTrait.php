@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * AJGL CSV RFC Component
  *
@@ -22,7 +24,7 @@ trait SplFileObjectTrait
 
     abstract public function fwrite($str, $length = null);
 
-    protected function fixCsvControl()
+    protected function fixCsvControl(): void
     {
         list($delimiter, $enclosure) = $this->getCsvControl();
         $this->setCsvControl($delimiter, $enclosure);
@@ -35,13 +37,13 @@ trait SplFileObjectTrait
         return parent::fgetcsv($delimiter, $enclosure, $enclosure);
     }
 
-    public function fputcsv($fields, $delimiter = ',', $enclosure = '"', $escape = '\\')
+    public function fputcsv($fields, $delimiter = ',', $enclosure = '"', $escape = '\\'): void
     {
         CsvRfcUtils::checkPutCsvEscape($escape);
         $this->fwrite(CsvRfcUtils::strPutCsv($fields, $delimiter, $enclosure));
     }
 
-    public function setCsvControl($delimiter = ',', $enclosure = '"', $escape = '"')
+    public function setCsvControl($delimiter = ',', $enclosure = '"', $escape = '"'): void
     {
         CsvRfcUtils::checkGetCsvEscape($enclosure, $escape);
         parent::setCsvControl($delimiter, $enclosure, $enclosure);

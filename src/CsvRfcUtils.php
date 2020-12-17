@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * AJGL CSV RFC Component
  *
@@ -33,14 +35,10 @@ class CsvRfcUtils
      * @see http://php.net/manual/en/function.fputcsv.php
      *
      * @param resource $handle
-     * @param string   $delimiter
-     * @param string   $enclosure
-     * @param string   $escape
-     * @param string   $eol
      *
-     * @return int|bool the number of bytes written, or FALSE on error
+     * @return int|false the number of bytes written, or FALSE on error
      */
-    public static function fPutCsv($handle, array $fields, $delimiter = ',', $enclosure = '"', $escape = '\\', $eol = null)
+    public static function fPutCsv($handle, array $fields, string $delimiter = ',', string $enclosure = '"', ?string $escape = '\\', string $eol = null)
     {
         self::checkPutCsvEscape($escape);
 
@@ -52,12 +50,7 @@ class CsvRfcUtils
         }
     }
 
-    /**
-     * @param string $enclosure
-     *
-     * @return bool
-     */
-    private static function hasAnyValueWithEscapeFollowedByEnclosure(array $fields, $enclosure)
+    private static function hasAnyValueWithEscapeFollowedByEnclosure(array $fields, string $enclosure): bool
     {
         foreach ($fields as $value) {
             if (false !== strpos($value, '\\'.$enclosure)) {
@@ -68,12 +61,7 @@ class CsvRfcUtils
         return false;
     }
 
-    /**
-     * @param string | null $eol
-     *
-     * @return bool
-     */
-    private static function resolveEol($eol)
+    private static function resolveEol(?string $eol): string
     {
         return null === $eol ? self::$defaultEol : (string) $eol;
     }
@@ -82,14 +70,10 @@ class CsvRfcUtils
      * @see http://php.net/manual/en/function.fgetcsv.php
      *
      * @param resource $handle
-     * @param int      $length
-     * @param string   $delimiter
-     * @param string   $enclosure
-     * @param string   $escape
      *
      * @return array|false|null
      */
-    public static function fGetCsv($handle, $length = 0, $delimiter = ',', $enclosure = '"', $escape = '"')
+    public static function fGetCsv($handle, int $length = 0, string $delimiter = ',', string $enclosure = '"', string $escape = '"')
     {
         self::checkGetCsvEscape($enclosure, $escape);
 
@@ -98,15 +82,8 @@ class CsvRfcUtils
 
     /**
      * @see http://php.net/manual/en/function.str_getcsv.php
-     *
-     * @param string $input
-     * @param string $delimiter
-     * @param string $enclosure
-     * @param string $escape
-     *
-     * @return array
      */
-    public static function strGetCsv($input, $delimiter = ',', $enclosure = '"', $escape = '"')
+    public static function strGetCsv(string $input, string $delimiter = ',', string $enclosure = '"', string $escape = '"'): array
     {
         self::checkGetCsvEscape($enclosure, $escape);
 
@@ -120,14 +97,8 @@ class CsvRfcUtils
      *
      * @see    https://github.com/goodby/csv
      * @see    https://github.com/goodby/csv/blob/c6677d9c68323ef734a67a34f3e5feabcafd5b4e/src/Goodby/CSV/Export/Standard/CsvFileObject.php#L46
-     *
-     * @param string $delimiter
-     * @param string $enclosure
-     * @param string $eol
-     *
-     * @return string
      */
-    public static function strPutCsv(array $fields, $delimiter = ',', $enclosure = '"', $eol = self::EOL_WRITE_DEFAULT)
+    public static function strPutCsv(array $fields, string $delimiter = ',', string $enclosure = '"', string $eol = self::EOL_WRITE_DEFAULT): string
     {
         $file = new \SplTempFileObject();
         $file->fputcsv($fields, $delimiter, $enclosure);
@@ -149,21 +120,16 @@ class CsvRfcUtils
 
     /**
      * Fix the enclosure escape in the given CSV raw line.
-     *
-     * @param string $enclosure
-     * @param string $line
      */
-    public static function fixEnclosureEscape($enclosure, $line)
+    public static function fixEnclosureEscape(string $enclosure, string $line): string
     {
         return str_replace('\\'.$enclosure, '\\'.$enclosure.$enclosure, $line);
     }
 
     /**
      * Emits a warning if the escape char is not the default backslash or null.
-     *
-     * @param string $escape
      */
-    public static function checkPutCsvEscape($escape)
+    public static function checkPutCsvEscape(?string $escape): void
     {
         if ('\\' !== $escape && null !== $escape) {
             trigger_error(
@@ -179,11 +145,8 @@ class CsvRfcUtils
 
     /**
      * Emits a warning if the enclosure char and escape char are different.
-     *
-     * @param string $enclosure
-     * @param string $escape
      */
-    public static function checkGetCsvEscape($enclosure, $escape)
+    public static function checkGetCsvEscape(string $enclosure, string $escape): void
     {
         if ($enclosure !== $escape) {
             trigger_error(
@@ -197,18 +160,12 @@ class CsvRfcUtils
         }
     }
 
-    /**
-     * @param string $eol
-     */
-    public static function setDefaultWriteEol($eol)
+    public static function setDefaultWriteEol(string $eol): void
     {
         self::$defaultEol = $eol;
     }
 
-    /**
-     * @return string $eol
-     */
-    public static function getDefaultWriteEol()
+    public static function getDefaultWriteEol(): string
     {
         return self::$defaultEol;
     }

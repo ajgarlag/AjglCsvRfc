@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * AJGL CSV RFC Component
  *
@@ -20,19 +22,19 @@ use League\Csv\Writer;
  */
 class CsvRfcWriteStreamFilterTest extends \PHPUnit_Framework_TestCase
 {
-    public function testRegiterWithDefaultFiltername()
+    public function testRegiterWithDefaultFiltername(): void
     {
         $this->assertTrue(CsvRfcWriteStreamFilter::register());
         $this->assertFalse(stream_filter_register(CsvRfcWriteStreamFilter::FILTERNAME_DEFAULT, 'php_user_filter'));
     }
 
-    public function testRegisterWithCustomName()
+    public function testRegisterWithCustomName(): void
     {
         $this->assertTrue(CsvRfcWriteStreamFilter::register('foo.bar'));
         $this->assertFalse(stream_filter_register('foo.bar', 'php_user_filter'));
     }
 
-    public function testFilterWithStandardEnclosure()
+    public function testFilterWithStandardEnclosure(): void
     {
         CsvRfcWriteStreamFilter::register();
         $fp = fopen('php://temp', 'w+');
@@ -44,7 +46,7 @@ class CsvRfcWriteStreamFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function testFilterWithCustomEnclosureViaParameters()
+    public function testFilterWithCustomEnclosureViaParameters(): void
     {
         CsvRfcWriteStreamFilter::register();
         $fp = fopen('php://temp', 'w+');
@@ -56,7 +58,7 @@ class CsvRfcWriteStreamFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function testFilterWithCustomEnclosureViaFiltername()
+    public function testFilterWithCustomEnclosureViaFiltername(): void
     {
         CsvRfcWriteStreamFilter::register('csv.rfc.write.%');
         $fp = fopen('php://temp', 'w+');
@@ -68,7 +70,7 @@ class CsvRfcWriteStreamFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function testLeagueCsvIntegrationWithPath()
+    public function testLeagueCsvIntegrationWithPath(): void
     {
         if (!class_exists('League\Csv\Writer')) {
             $this->markTestSkipped("'league/csv' package not found.");

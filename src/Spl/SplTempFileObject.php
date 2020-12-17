@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * AJGL CSV RFC Component
  *
@@ -18,9 +20,13 @@ class SplTempFileObject extends \SplTempFileObject
 {
     use SplFileObjectTrait;
 
-    public function __construct($max_memory = null)
+    public function __construct(int $max_memory = null)
     {
-        parent::__construct($max_memory);
+        if (null === $max_memory) {
+            parent::__construct();
+        } else {
+            parent::__construct($max_memory);
+        }
         $this->fixCsvControl();
     }
 }

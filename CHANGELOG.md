@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Require PHP >=7.3 or >=8.0
 - Upgrade php-cs-fixer dependency and fix-cs
+- Migrate code to PHP 7.3 adding scalar param type hints and return types
 
 ## [0.3.0] - 2019-03-29
 ### Added

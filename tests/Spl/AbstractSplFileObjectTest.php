@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * AJGL CSV RFC Component
  *
@@ -23,12 +25,12 @@ abstract class AbstractSplFileObjectTest extends \PHPUnit_Framework_TestCase
      */
     protected $fileObject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->fileObject = $this->buildFileObject();
     }
 
-    public function testCsvIteration()
+    public function testCsvIteration(): void
     {
         $this->fileObject->fwrite('"Hello,World!",Hello;World!,"Hello\""World\""!","Hello\\\'World\\\'!","Hello'."\n".'World!"'."\n");
         $this->fileObject->rewind();
@@ -41,14 +43,14 @@ abstract class AbstractSplFileObjectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function testFreadcsv()
+    public function testFreadcsv(): void
     {
         $this->fileObject->fwrite('"Hello,World!",Hello;World!,"Hello\""World\""!","Hello\\\'World\\\'!","Hello'."\n".'World!"'."\n");
         $this->fileObject->rewind();
         $this->assertEquals(['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"], $this->fileObject->fgetcsv());
     }
 
-    public function testFputcsv()
+    public function testFputcsv(): void
     {
         $this->fileObject->fputcsv(['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"]);
         $this->fileObject->rewind();

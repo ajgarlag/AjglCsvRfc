@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * AJGL CSV RFC Component
  *
@@ -15,13 +17,10 @@ namespace Ajgl\Csv\Rfc;
  * @see http://php.net/manual/en/function.fputcsv.php
  *
  * @param resource $handle
- * @param string   $delimiter
- * @param string   $enclosure
- * @param string   $escape
  *
- * @return int|bool the number of bytes written, or FALSE on error
+ * @return int|false the number of bytes written, or FALSE on error
  */
-function fputcsv($handle, array $fields, $delimiter = ',', $enclosure = '"', $escape = '\\')
+function fputcsv($handle, array $fields, string $delimiter = ',', string $enclosure = '"', string $escape = '\\')
 {
     return CsvRfcUtils::fPutCsv($handle, $fields, $delimiter, $enclosure, $escape);
 }
@@ -30,29 +29,18 @@ function fputcsv($handle, array $fields, $delimiter = ',', $enclosure = '"', $es
  * @see http://php.net/manual/en/function.fgetcsv.php
  *
  * @param resource $handle
- * @param array    $length
- * @param string   $delimiter
- * @param string   $enclosure
- * @param string   $escape
  *
  * @return array|false|null
  */
-function fgetcsv($handle, $length = 0, $delimiter = ',', $enclosure = '"', $escape = '"')
+function fgetcsv($handle, int $length = 0, string $delimiter = ',', string $enclosure = '"', string $escape = '"')
 {
     return CsvRfcUtils::fGetCsv($handle, $length, $delimiter, $enclosure, $escape);
 }
 
 /**
  * @see http://php.net/manual/en/function.str_getcsv.php
- *
- * @param string $input
- * @param string $delimiter
- * @param string $enclosure
- * @param string $escape
- *
- * @return array
  */
-function str_getcsv($input, $delimiter = ',', $enclosure = '"', $escape = '"')
+function str_getcsv(string $input, string $delimiter = ',', string $enclosure = '"', string $escape = '"'): array
 {
     return CsvRfcUtils::strGetCsv($input, $delimiter, $enclosure, $escape);
 }

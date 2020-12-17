@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * AJGL CSV RFC Component
  *
@@ -17,27 +19,19 @@ class CsvRfcWriteStreamFilter extends \php_user_filter
 
     private $filternameEnclosure = '"';
 
-    /**
-     * @param string $filtername
-     *
-     * @return bool
-     */
-    public static function register($filtername = self::FILTERNAME_DEFAULT)
+    public static function register(string $filtername = self::FILTERNAME_DEFAULT): bool
     {
         return stream_filter_register($filtername, 'Ajgl\Csv\Rfc\CsvRfcWriteStreamFilter');
     }
 
-    /**
-     * @return bool
-     */
-    public function onCreate()
+    public function onCreate(): bool
     {
         $this->extractEnclosureFromFilternameIfAvailable();
 
         return true;
     }
 
-    private function extractEnclosureFromFilternameIfAvailable()
+    private function extractEnclosureFromFilternameIfAvailable(): void
     {
         if (\strlen($this->filtername) === \strlen(self::FILTERNAME_DEFAULT) + 2 && 0 === strpos($this->filtername, self::FILTERNAME_DEFAULT.'.')) {
             $this->filternameEnclosure = substr($this->filtername, -1);
@@ -65,10 +59,7 @@ class CsvRfcWriteStreamFilter extends \php_user_filter
         return PSFS_PASS_ON;
     }
 
-    /**
-     * @return string
-     */
-    private function resolveEnclosure()
+    private function resolveEnclosure(): string
     {
         if (\is_array($this->params) && isset($this->params['enclosure']) && 1 === \strlen($this->params['enclosure'])) {
             return $this->params['enclosure'];
