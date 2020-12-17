@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- Require PHP >=7.3 or >=8.0
+
 ## [0.3.0] - 2019-03-29
 ### Added
 - Add `Ajgl\Csv\Rfc\CsvRfcUtils::fPutCsv` return value.
