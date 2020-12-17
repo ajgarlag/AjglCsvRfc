@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.0] - 2020-12-17
+
 ### Changed
 - Require PHP >=7.3 or >=8.0
 - Upgrade php-cs-fixer dependency and fix-cs
@@ -37,5 +39,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - `SplFileObject::fputcsv`
   - `SplFileObject::setCsvControl`
 
-[unreleased]: https://github.com/ajgarlag/AjglCsvRfc/compare/0.2.0...master
+[unreleased]: https://github.com/ajgarlag/AjglCsvRfc/compare/0.4.0...master
+[0.4.0]: https://github.com/ajgarlag/AjglCsvRfc/compare/0.3.0...0.4.0
+[0.3.0]: https://github.com/ajgarlag/AjglCsvRfc/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/ajgarlag/AjglCsvRfc/compare/0.1.0...0.2.0
