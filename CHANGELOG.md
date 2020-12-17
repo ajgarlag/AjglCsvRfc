@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Upgrade php-cs-fixer dependency and fix-cs
 - Migrate code to PHP 7.3 adding scalar param type hints and return types
 - Upgrade phpunit dependency and fix tests
+- Migrate from travis-ci to github actions
 
 ## [0.3.0] - 2019-03-29
 ### Added

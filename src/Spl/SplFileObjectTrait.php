@@ -22,7 +22,7 @@ trait SplFileObjectTrait
 {
     abstract public function getCsvControl();
 
-    abstract public function fwrite($str, $length = null);
+    abstract public function fwrite(string $data, int $length = 0);
 
     protected function fixCsvControl(): void
     {

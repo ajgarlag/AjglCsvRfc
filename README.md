@@ -4,15 +4,13 @@ AjglCsvRfc
 The AjglCsvRfc component offers a drop in replacement for native PHP CSV related functions to read and/or write RFC4180
 compliant CSV files.
 
-[![Build Status](https://travis-ci.org/ajgarlag/AjglCsvRfc.png?branch=master)](https://travis-ci.org/ajgarlag/AjglCsvRfc)
+[![Build Status](https://github.com/ajgarlag/AjglCsvRfc/workflows/test/badge.svg?branch=master)](https://github.com/ajgarlag/AjglCsvRfc/actions)
 [![Latest Stable Version](https://poser.pugx.org/ajgl/csv-rfc/v/stable.png)](https://packagist.org/packages/ajgl/csv-rfc)
 [![Latest Unstable Version](https://poser.pugx.org/ajgl/csv-rfc/v/unstable.png)](https://packagist.org/packages/ajgl/csv-rfc)
 [![Total Downloads](https://poser.pugx.org/ajgl/csv-rfc/downloads.png)](https://packagist.org/packages/ajgl/csv-rfc)
 [![Montly Downloads](https://poser.pugx.org/ajgl/csv-rfc/d/monthly.png)](https://packagist.org/packages/ajgl/csv-rfc)
 [![Daily Downloads](https://poser.pugx.org/ajgl/csv-rfc/d/daily.png)](https://packagist.org/packages/ajgl/csv-rfc)
 [![License](https://poser.pugx.org/ajgl/csv-rfc/license.png)](https://packagist.org/packages/ajgl/csv-rfc)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ajgarlag/AjglCsvRfc/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ajgarlag/AjglCsvRfc/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/ajgarlag/AjglCsvRfc/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ajgarlag/AjglCsvRfc/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/7218debc-6c07-4a60-9b0b-e08103c1e0b2/mini.png)](https://insight.sensiolabs.com/projects/7218debc-6c07-4a60-9b0b-e08103c1e0b2)
 
 The native PHP implementation contains a *Wont fix* bug [#50686] when you try to write a CSV field which contains the
