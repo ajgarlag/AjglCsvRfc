@@ -15,12 +15,11 @@ namespace Ajgl\Csv\Rfc;
  * @see http://php.net/manual/en/function.fputcsv.php
  *
  * @param resource $handle
- * @param array    $fields
  * @param string   $delimiter
  * @param string   $enclosure
  * @param string   $escape
  *
- * @return int|bool the number of bytes written, or FALSE on error.
+ * @return int|bool the number of bytes written, or FALSE on error
  */
 function fputcsv($handle, array $fields, $delimiter = ',', $enclosure = '"', $escape = '\\')
 {

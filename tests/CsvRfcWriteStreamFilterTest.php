@@ -37,7 +37,7 @@ class CsvRfcWriteStreamFilterTest extends \PHPUnit_Framework_TestCase
         CsvRfcWriteStreamFilter::register();
         $fp = fopen('php://temp', 'w+');
         stream_filter_append($fp, CsvRfcWriteStreamFilter::FILTERNAME_DEFAULT, STREAM_FILTER_WRITE);
-        fputcsv($fp, array('"Hello\", World!'), ',', '"');
+        fputcsv($fp, ['"Hello\", World!'], ',', '"');
         rewind($fp);
         $actual = fgets($fp, 4096);
         $expected = '"""Hello\"", World!"'."\n";
@@ -48,8 +48,8 @@ class CsvRfcWriteStreamFilterTest extends \PHPUnit_Framework_TestCase
     {
         CsvRfcWriteStreamFilter::register();
         $fp = fopen('php://temp', 'w+');
-        stream_filter_append($fp, CsvRfcWriteStreamFilter::FILTERNAME_DEFAULT, STREAM_FILTER_WRITE, array('enclosure' => '%'));
-        fputcsv($fp, array('%Hello\%, World!'), ',', '%');
+        stream_filter_append($fp, CsvRfcWriteStreamFilter::FILTERNAME_DEFAULT, STREAM_FILTER_WRITE, ['enclosure' => '%']);
+        fputcsv($fp, ['%Hello\%, World!'], ',', '%');
         rewind($fp);
         $actual = fgets($fp, 4096);
         $expected = '%%%Hello\%%, World!%'."\n";
@@ -61,7 +61,7 @@ class CsvRfcWriteStreamFilterTest extends \PHPUnit_Framework_TestCase
         CsvRfcWriteStreamFilter::register('csv.rfc.write.%');
         $fp = fopen('php://temp', 'w+');
         stream_filter_append($fp, 'csv.rfc.write.%', STREAM_FILTER_WRITE);
-        fputcsv($fp, array('%Hello\%, World!'), ',', '%');
+        fputcsv($fp, ['%Hello\%, World!'], ',', '%');
         rewind($fp);
         $actual = fgets($fp, 4096);
         $expected = '%%%Hello\%%, World!%'."\n";
@@ -80,7 +80,7 @@ class CsvRfcWriteStreamFilterTest extends \PHPUnit_Framework_TestCase
         $filepath = tempnam(sys_get_temp_dir(), 'ajgl_csv_rfc_test_');
         $writer = Writer::createFromPath($filepath);
         $writer->appendStreamFilter(CsvRfcWriteStreamFilter::FILTERNAME_DEFAULT);
-        $writer->insertOne(array($payload));
+        $writer->insertOne([$payload]);
         unset($writer);
 
         $fp = fopen($filepath, 'r');
@@ -91,7 +91,7 @@ class CsvRfcWriteStreamFilterTest extends \PHPUnit_Framework_TestCase
 
         $reader = Reader::createFromPath($filepath);
         $reader->setEscape($reader->getEnclosure());
-        $data = array(array($payload));
+        $data = [[$payload]];
         $this->assertEquals($data, iterator_to_array($reader));
     }
 }

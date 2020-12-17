@@ -18,9 +18,9 @@ use Ajgl\Csv\Rfc;
  */
 class functionsTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_str_getcsv()
+    public function testStrGetcsv()
     {
-        $expected = array('Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!");
+        $expected = ['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"];
 
         $this->assertEquals(
             $expected,
@@ -36,9 +36,9 @@ class functionsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function test_fgetcsv()
+    public function testFgetcsv()
     {
-        $expected = array('Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!");
+        $expected = ['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"];
 
         $fp = fopen('php://temp', 'w+');
         fwrite($fp, '"Hello,World!",Hello;World!,"Hello\""World\""!","Hello\\\'World\\\'!","Hello'."\n".'World!"'."\n");
@@ -65,9 +65,9 @@ class functionsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function test_fputcsv_data()
+    public function testFputcsvData()
     {
-        $fields = array('Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!");
+        $fields = ['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"];
 
         $fp = fopen('php://temp', 'w+');
         Rfc\fputcsv($fp, $fields);
@@ -94,15 +94,15 @@ class functionsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function test_fputcsv_return_value()
+    public function testFputcsvReturnValue()
     {
-        $fields = array('a');
+        $fields = ['a'];
 
         $fp = fopen('php://temp', 'w+');
         $result = Rfc\fputcsv($fp, $fields);
         rewind($fp);
         $this->assertEquals(
-            "a"."\n",
+            'a'."\n",
             fread($fp, 4096)
         );
         $this->assertEquals(2, $result);

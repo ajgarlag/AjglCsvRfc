@@ -33,8 +33,8 @@ abstract class AbstractSplFileObjectTest extends \PHPUnit_Framework_TestCase
         $this->fileObject->fwrite('"Hello,World!",Hello;World!,"Hello\""World\""!","Hello\\\'World\\\'!","Hello'."\n".'World!"'."\n");
         $this->fileObject->rewind();
         $this->fileObject->setFlags(SplFileObject::READ_CSV | SplFileObject::READ_AHEAD | SplFileObject::SKIP_EMPTY);
-        $expected = array(array('Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"));
-        $actual = array();
+        $expected = [['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"]];
+        $actual = [];
         foreach ($this->fileObject as $row) {
             $actual[] = $row;
         }
@@ -45,15 +45,15 @@ abstract class AbstractSplFileObjectTest extends \PHPUnit_Framework_TestCase
     {
         $this->fileObject->fwrite('"Hello,World!",Hello;World!,"Hello\""World\""!","Hello\\\'World\\\'!","Hello'."\n".'World!"'."\n");
         $this->fileObject->rewind();
-        $this->assertEquals(array('Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"), $this->fileObject->fgetcsv());
+        $this->assertEquals(['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"], $this->fileObject->fgetcsv());
     }
 
     public function testFputcsv()
     {
-        $this->fileObject->fputcsv(array('Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"));
+        $this->fileObject->fputcsv(['Hello,World!', 'Hello;World!', 'Hello\"World\"!', "Hello\'World\'!", "Hello\nWorld!"]);
         $this->fileObject->rewind();
         /* @todo drop with PHP5.4 */
-        if (PHP_VERSION_ID < 50511) {
+        if (\PHP_VERSION_ID < 50511) {
             $content = '';
             while (!$this->fileObject->eof()) {
                 $content .= $this->fileObject->fgets();

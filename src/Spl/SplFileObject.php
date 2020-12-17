@@ -21,7 +21,7 @@ class SplFileObject extends \SplFileObject
     public function __construct($filename, $open_mode = 'r', $use_include_path = false, $context = null)
     {
         /* @todo drop with PHP5.4 */
-        if (PHP_VERSION_ID < 50505 && $context === null) {
+        if (\PHP_VERSION_ID < 50505 && null === $context) {
             parent::__construct($filename, $open_mode, $use_include_path);
         } else {
             parent::__construct($filename, $open_mode, $use_include_path, $context);

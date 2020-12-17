@@ -39,7 +39,7 @@ class CsvRfcWriteStreamFilter extends \php_user_filter
 
     private function extractEnclosureFromFilternameIfAvailable()
     {
-        if (strlen($this->filtername) === strlen(self::FILTERNAME_DEFAULT) + 2 && strpos($this->filtername, self::FILTERNAME_DEFAULT.'.') === 0) {
+        if (\strlen($this->filtername) === \strlen(self::FILTERNAME_DEFAULT) + 2 && 0 === strpos($this->filtername, self::FILTERNAME_DEFAULT.'.')) {
             $this->filternameEnclosure = substr($this->filtername, -1);
         }
     }
@@ -70,7 +70,7 @@ class CsvRfcWriteStreamFilter extends \php_user_filter
      */
     private function resolveEnclosure()
     {
-        if (is_array($this->params) && isset($this->params['enclosure']) && strlen($this->params['enclosure']) === 1) {
+        if (\is_array($this->params) && isset($this->params['enclosure']) && 1 === \strlen($this->params['enclosure'])) {
             return $this->params['enclosure'];
         }
 
